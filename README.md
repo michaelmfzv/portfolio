@@ -29,11 +29,11 @@ Portafolio estático hecho con Astro y Tailwind CSS, con español como idioma ra
     ├── layouts/Layout.astro
     ├── pages/
     │   ├── index.astro
-    │   ├── guias/[slug].astro
+    │   ├── casos-de-estudio/[slug].astro
     │   ├── en/index.astro
-    │   ├── en/guias/[slug].astro
+    │   ├── en/case-studies/[slug].astro
     │   ├── fr/index.astro
-    │   └── fr/guias/[slug].astro
+    │   └── fr/etudes-de-cas/[slug].astro
     └── styles/global.css
 ```
 

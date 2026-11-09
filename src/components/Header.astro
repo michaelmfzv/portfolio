@@ -10,7 +10,7 @@ const home = lang === 'es' ? '/' : `/${lang}/`;
     <a href={home} class="font-mono text-sm font-semibold tracking-tight" aria-label="Michael Zapata — {labels.navHome}">mz<span class="text-accent dark:text-terminal">.</span></a>
     <nav class="flex items-center gap-4 sm:gap-6" aria-label="Main navigation">
       <a class="text-sm text-stone-600 hover:text-accent dark:text-stone-300 dark:hover:text-terminal" href={home}>{labels.navHome}</a>
-      <a class="text-sm text-stone-600 hover:text-accent dark:text-stone-300 dark:hover:text-terminal" href={`${home}#showcases`}>{labels.navGuides}</a>
+      <a class="text-sm text-stone-600 hover:text-accent dark:text-stone-300 dark:hover:text-terminal" href={`${home}#showcases`}>{labels.navCases}</a>
       <label class="sr-only" for="language-select">{labels.language}</label>
       <select id="language-select" class="bg-transparent text-sm text-stone-700 outline-none dark:text-stone-200" aria-label={labels.language}>
         <option value="es" selected={lang === 'es'}>ES</option>

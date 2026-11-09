@@ -13,7 +13,8 @@ const nameParts = site.name.split(' ');
 const givenNames = nameParts.slice(0, 2).join(' ');
 const familyNames = nameParts.slice(2).join(' ');
 const mobileName = `${nameParts[0]} ${nameParts[2]}`;
-const guideUrl = (id: string) => localizedPath(lang, `guias/${id.split('/').at(-1)}`);
+const casePath = lang === 'es' ? 'casos-de-estudio' : lang === 'en' ? 'case-studies' : 'etudes-de-cas';
+const guideUrl = (id: string) => localizedPath(lang, `${casePath}/${id.split('/').at(-1)}`);
 ---
 <Layout lang={lang} title={`${site.name} — ${t.role}`} description={`${t.intro} ${t.intro2}`}>
   <div class="section-shell">
@@ -32,7 +33,26 @@ const guideUrl = (id: string) => localizedPath(lang, `guias/${id.split('/').at(-
         <div class="mt-7 max-w-2xl space-y-2 text-lg leading-8 text-stone-600 dark:text-stone-300">
           <p>{t.intro}</p><p>{t.intro2}</p>
         </div>
-        <a href="#showcases" class="mt-8 inline-flex items-center gap-2 rounded-md bg-ink px-4 py-3 text-sm font-medium text-white hover:bg-accent dark:bg-terminal dark:text-[#07100b] dark:hover:bg-emerald-200">{t.navGuides}<span aria-hidden="true">↓</span></a>
+        <ul class="mt-8 flex flex-wrap gap-3" aria-label={lang === 'es' ? 'Enlaces principales' : lang === 'en' ? 'Quick links' : 'Liens principaux'}>
+          <li>
+            <a class="inline-flex items-center gap-2 rounded-md border border-stone-300 px-4 py-2.5 text-sm font-medium text-stone-700 transition-colors hover:border-accent hover:text-accent dark:border-emerald-900 dark:text-emerald-100 dark:hover:border-terminal dark:hover:text-terminal" href={site.linkedin} target="_blank" rel="noreferrer">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.42v1.56h.05a3.75 3.75 0 0 1 3.37-1.85c3.6 0 4.26 2.37 4.26 5.45v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/></svg>
+              LinkedIn
+            </a>
+          </li>
+          <li>
+            <a class="inline-flex items-center gap-2 rounded-md border border-stone-300 px-4 py-2.5 text-sm font-medium text-stone-700 transition-colors hover:border-accent hover:text-accent dark:border-emerald-900 dark:text-emerald-100 dark:hover:border-terminal dark:hover:text-terminal" href={`mailto:${site.email}`}>
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>
+              {t.emailLabel}
+            </a>
+          </li>
+          <li>
+            <a class="inline-flex items-center gap-2 rounded-md border border-stone-300 px-4 py-2.5 text-sm font-medium text-stone-700 transition-colors hover:border-accent hover:text-accent dark:border-emerald-900 dark:text-emerald-100 dark:hover:border-terminal dark:hover:text-terminal" href="#showcases">
+              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 3.75h9l5 5v11.5H5z"/><path d="M14 3.75v5h5M8 13h8M8 16.5h8"/></svg>
+              {t.navCases}
+            </a>
+          </li>
+        </ul>
       </div>
       <div class="surface hidden rounded-lg p-6 font-mono text-xs leading-6 text-stone-500 md:block dark:text-emerald-100/70" aria-hidden="true">
         <div class="mb-5 flex gap-1.5"><i class="h-2 w-2 rounded-full bg-red-400"></i><i class="h-2 w-2 rounded-full bg-amber-400"></i><i class="h-2 w-2 rounded-full bg-emerald-500"></i></div>
@@ -43,14 +63,14 @@ const guideUrl = (id: string) => localizedPath(lang, `guias/${id.split('/').at(-
       </div>
     </section>
 
-    <section class="border-t border-stone-200 py-16 dark:border-emerald-950" aria-labelledby="stack-title">
-      <div class="mb-7"><p class="eyebrow">01 / stack</p><h2 id="stack-title" class="mt-2 text-2xl font-semibold">{t.stack}</h2><p class="mt-2 text-sm text-stone-600 dark:text-stone-300">{t.stackNote}</p></div>
-      <ul class="flex flex-wrap gap-3">{technologies.map((name) => <li><TechBadge name={name} /></li>)}</ul>
+    <section id="showcases" class="scroll-mt-10 border-t border-stone-200 py-16 dark:border-emerald-950" aria-labelledby="work-title">
+      <div class="mb-8 flex flex-col justify-between gap-3 sm:flex-row sm:items-end"><div><p class="eyebrow">01 / case studies</p><h2 id="work-title" class="mt-2 text-2xl font-semibold">{t.work}</h2></div><p class="max-w-xl text-sm leading-6 text-stone-600 dark:text-stone-300">{t.workNote}</p></div>
+      {guides.length ? <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">{guides.map((guide) => <ShowcaseCard title={guide.data.title} description={guide.data.description} href={guideUrl(guide.id)} cover={guide.data.cover} tags={guide.data.tags} label={t.draftLabel} />)}</div> : <p class="text-sm text-stone-600 dark:text-stone-300">{t.empty}</p>}
     </section>
 
-    <section id="showcases" class="scroll-mt-10 border-t border-stone-200 py-16 dark:border-emerald-950" aria-labelledby="work-title">
-      <div class="mb-8 flex flex-col justify-between gap-3 sm:flex-row sm:items-end"><div><p class="eyebrow">02 / field notes</p><h2 id="work-title" class="mt-2 text-2xl font-semibold">{t.work}</h2></div><p class="max-w-xl text-sm leading-6 text-stone-600 dark:text-stone-300">{t.workNote}</p></div>
-      {guides.length ? <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">{guides.map((guide) => <ShowcaseCard title={guide.data.title} description={guide.data.description} href={guideUrl(guide.id)} cover={guide.data.cover} tags={guide.data.tags} label={t.draftLabel} />)}</div> : <p class="text-sm text-stone-600 dark:text-stone-300">{t.empty}</p>}
+    <section class="border-t border-stone-200 py-16 dark:border-emerald-950" aria-labelledby="stack-title">
+      <div class="mb-7"><p class="eyebrow">02 / stack</p><h2 id="stack-title" class="mt-2 text-2xl font-semibold">{t.stack}</h2><p class="mt-2 text-sm text-stone-600 dark:text-stone-300">{t.stackNote}</p></div>
+      <ul class="flex flex-wrap gap-3">{technologies.map((name) => <li><TechBadge name={name} /></li>)}</ul>
     </section>
 
     <section class="grid gap-8 border-t border-stone-200 py-16 md:grid-cols-2 dark:border-emerald-950" aria-labelledby="about-title">
