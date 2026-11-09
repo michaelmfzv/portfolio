@@ -48,7 +48,7 @@ const guideUrl = (id: string) => localizedPath(lang, `${casePath}/${id.split('/'
             </a>
           </li>
           <li>
-            <button type="button" data-cv-open aria-haspopup="dialog" aria-controls="cv-preview-dialog" class="inline-flex items-center gap-2 rounded-md border border-stone-300 px-4 py-2.5 text-sm font-medium text-stone-700 transition-colors hover:border-accent hover:text-accent dark:border-emerald-900 dark:text-emerald-100 dark:hover:border-terminal dark:hover:text-terminal">
+            <button type="button" data-cv-open data-cv-url={cvHref} aria-haspopup="dialog" aria-controls="cv-preview-dialog" class="inline-flex items-center gap-2 rounded-md border border-stone-300 px-4 py-2.5 text-sm font-medium text-stone-700 transition-colors hover:border-accent hover:text-accent dark:border-emerald-900 dark:text-emerald-100 dark:hover:border-terminal dark:hover:text-terminal">
               <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2.5 12s3.4-6 9.5-6 9.5 6 9.5 6-3.4 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.5"/></svg>
               {t.viewCv}
             </button>
@@ -113,7 +113,15 @@ const guideUrl = (id: string) => localizedPath(lang, `${casePath}/${id.split('/'
 <script>
   const cvDialog = document.querySelector<HTMLDialogElement>('#cv-preview-dialog');
   document.querySelectorAll<HTMLButtonElement>('[data-cv-open]').forEach((button) => {
-    button.addEventListener('click', () => cvDialog?.showModal());
+    button.addEventListener('click', () => {
+      const cvUrl = button.dataset.cvUrl;
+      if (window.matchMedia('(max-width: 767px)').matches && cvUrl) {
+        // En móviles dejamos que el navegador abra el PDF en su visor nativo.
+        window.location.assign(cvUrl);
+        return;
+      }
+      cvDialog?.showModal();
+    });
   });
   document.querySelector('[data-cv-close]')?.addEventListener('click', () => cvDialog?.close());
   cvDialog?.addEventListener('click', (event) => {
