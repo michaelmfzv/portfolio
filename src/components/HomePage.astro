@@ -70,14 +70,14 @@ const guideUrl = (id: string) => localizedPath(lang, `${casePath}/${id.split('/'
       </div>
     </section>
 
-    <section id="showcases" class="scroll-mt-10 border-t border-stone-200 py-16 dark:border-emerald-950" aria-labelledby="work-title">
-      <div class="mb-8 flex flex-col justify-between gap-3 sm:flex-row sm:items-end"><div><p class="eyebrow">01 / case studies</p><h2 id="work-title" class="mt-2 text-2xl font-semibold">{t.work}</h2></div><p class="max-w-xl text-sm leading-6 text-stone-600 dark:text-stone-300">{t.workNote}</p></div>
-      {guides.length ? <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">{guides.map((guide) => <ShowcaseCard title={guide.data.title} description={guide.data.description} href={guideUrl(guide.id)} cover={guide.data.cover} tags={guide.data.tags} label={t.draftLabel} />)}</div> : <p class="text-sm text-stone-600 dark:text-stone-300">{t.empty}</p>}
+    <section id="technologies" class="scroll-mt-10 border-t border-stone-200 py-16 dark:border-emerald-950" aria-labelledby="technologies-title">
+      <div class="mb-7"><p class="eyebrow">01 / technologies</p><h2 id="technologies-title" class="mt-2 text-2xl font-semibold">{t.technologies}</h2><p class="mt-2 text-sm text-stone-600 dark:text-stone-300">{t.technologiesNote}</p></div>
+      <ul class="flex flex-wrap gap-3">{technologies.map((name) => <li><TechBadge name={name} /></li>)}</ul>
     </section>
 
-    <section class="border-t border-stone-200 py-16 dark:border-emerald-950" aria-labelledby="stack-title">
-      <div class="mb-7"><p class="eyebrow">02 / stack</p><h2 id="stack-title" class="mt-2 text-2xl font-semibold">{t.stack}</h2><p class="mt-2 text-sm text-stone-600 dark:text-stone-300">{t.stackNote}</p></div>
-      <ul class="flex flex-wrap gap-3">{technologies.map((name) => <li><TechBadge name={name} /></li>)}</ul>
+    <section id="showcases" class="scroll-mt-10 border-t border-stone-200 py-16 dark:border-emerald-950" aria-labelledby="work-title">
+      <div class="mb-8 flex flex-col justify-between gap-3 sm:flex-row sm:items-end"><div><p class="eyebrow">02 / case studies</p><h2 id="work-title" class="mt-2 text-2xl font-semibold">{t.work}</h2></div><p class="max-w-xl text-sm leading-6 text-stone-600 dark:text-stone-300">{t.workNote}</p></div>
+      {guides.length ? <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">{guides.map((guide) => <ShowcaseCard title={guide.data.title} description={guide.data.description} href={guideUrl(guide.id)} cover={guide.data.cover} tags={guide.data.tags} label={t.draftLabel} />)}</div> : <p class="text-sm text-stone-600 dark:text-stone-300">{t.empty}</p>}
     </section>
 
     <section class="grid gap-8 border-t border-stone-200 py-16 md:grid-cols-2 dark:border-emerald-950" aria-labelledby="about-title">
