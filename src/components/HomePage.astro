@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import TechBadge from './TechBadge.astro';
 import ShowcaseCard from './ShowcaseCard.astro';
 import { ui, roleTitles, localizedPath, type Language } from '../i18n/ui';
-import { technologies, site } from '../data/site';
+import { experience, technologies, site } from '../data/site';
 interface Work { id: string; data: { title: string; description: string; tags: string[]; cover?: string; }; }
 interface Props { lang: Language; guides: Work[]; }
 const { lang, guides } = Astro.props;
@@ -16,6 +16,8 @@ const mobileName = `${nameParts[0]} ${nameParts[2]}`;
 const cvHref = `/cv/michael-zapata-cv-${lang}.pdf`;
 const casePath = lang === 'es' ? 'casos-de-estudio' : lang === 'en' ? 'case-studies' : 'etudes-de-cas';
 const guideUrl = (id: string) => localizedPath(lang, `${casePath}/${id.split('/').at(-1)}`);
+const experienceUrl = localizedPath(lang, lang === 'es' ? 'experiencia' : 'experience');
+const experienceId = (company: string) => company.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 ---
 <Layout lang={lang} title={`${site.name} — ${t.role}`} description={`${t.intro} ${t.intro2}`}>
   <div class="section-shell">
@@ -37,27 +39,21 @@ const guideUrl = (id: string) => localizedPath(lang, `${casePath}/${id.split('/'
         <ul class="mt-8 flex flex-wrap gap-3" aria-label={lang === 'es' ? 'Enlaces principales' : lang === 'en' ? 'Quick links' : 'Liens principaux'}>
           <li>
             <a class="inline-flex items-center gap-2 rounded-md border border-stone-300 px-4 py-2.5 text-sm font-medium text-stone-700 transition-colors hover:border-accent hover:text-accent dark:border-emerald-900 dark:text-emerald-100 dark:hover:border-terminal dark:hover:text-terminal" href={site.linkedin} target="_blank" rel="noreferrer">
-              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.42v1.56h.05a3.75 3.75 0 0 1 3.37-1.85c3.6 0 4.26 2.37 4.26 5.45v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/></svg>
+              <svg class="h-4 w-4 shrink-0 text-[#0a66c2] dark:text-[#70b7ff]" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.42v1.56h.05a3.75 3.75 0 0 1 3.37-1.85c3.6 0 4.26 2.37 4.26 5.45v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/></svg>
               LinkedIn
             </a>
           </li>
           <li>
             <a class="inline-flex items-center gap-2 rounded-md border border-stone-300 px-4 py-2.5 text-sm font-medium text-stone-700 transition-colors hover:border-accent hover:text-accent dark:border-emerald-900 dark:text-emerald-100 dark:hover:border-terminal dark:hover:text-terminal" href={`mailto:${site.email}`}>
-              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>
+              <svg class="h-4 w-4 shrink-0 text-accent dark:text-terminal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>
               {t.emailLabel}
             </a>
           </li>
           <li>
             <button type="button" data-cv-open data-cv-url={cvHref} aria-haspopup="dialog" aria-controls="cv-preview-dialog" class="inline-flex items-center gap-2 rounded-md border border-stone-300 px-4 py-2.5 text-sm font-medium text-stone-700 transition-colors hover:border-accent hover:text-accent dark:border-emerald-900 dark:text-emerald-100 dark:hover:border-terminal dark:hover:text-terminal">
-              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2.5 12s3.4-6 9.5-6 9.5 6 9.5 6-3.4 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.5"/></svg>
+              <svg class="h-4 w-4 shrink-0 text-accent dark:text-terminal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3.75h9l5 5v11.5H5z"/><path d="M14 3.75v5h5M8 13h8M8 16.5h6"/></svg>
               {t.viewCv}
             </button>
-          </li>
-          <li>
-            <a class="inline-flex items-center gap-2 rounded-md border border-stone-300 px-4 py-2.5 text-sm font-medium text-stone-700 transition-colors hover:border-accent hover:text-accent dark:border-emerald-900 dark:text-emerald-100 dark:hover:border-terminal dark:hover:text-terminal" href="#showcases">
-              <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 3.75h9l5 5v11.5H5z"/><path d="M14 3.75v5h5M8 13h8M8 16.5h8"/></svg>
-              {t.navCases}
-            </a>
           </li>
         </ul>
       </div>
@@ -75,18 +71,31 @@ const guideUrl = (id: string) => localizedPath(lang, `${casePath}/${id.split('/'
       <ul class="flex flex-wrap gap-3">{technologies.map((name) => <li><TechBadge name={name} /></li>)}</ul>
     </section>
 
+    <section id="experience" class="scroll-mt-10 border-t border-stone-200 py-16 dark:border-emerald-950" aria-labelledby="experience-title">
+      <div class="mb-8 flex flex-col justify-between gap-3 sm:flex-row sm:items-end"><div><p class="eyebrow">02 / experience</p><h2 id="experience-title" class="mt-2 text-2xl font-semibold">{t.experience}</h2></div><p class="max-w-xl text-sm leading-6 text-stone-600 dark:text-stone-300">{t.experienceNote}</p></div>
+      <div class="grid gap-5 md:grid-cols-3">
+        {experience[lang].map((job) => <a href={`${experienceUrl}#${experienceId(job.company)}`} class="group flex h-full flex-col rounded-lg border border-stone-200 bg-white/60 p-5 transition-colors hover:border-accent/60 hover:bg-white dark:border-emerald-950 dark:bg-[#0d1713]/60 dark:hover:border-terminal/60 dark:hover:bg-[#0d1713]">
+          <div class="flex flex-col justify-between gap-2"><h3 class="text-lg font-semibold group-hover:text-accent dark:group-hover:text-terminal">{job.role}</h3><p class="font-mono text-xs text-stone-500 dark:text-emerald-200/70">{job.period}</p></div>
+          <p class="mt-2 text-sm font-medium text-accent dark:text-terminal">{job.company}</p>
+          <p class="mt-1 text-xs text-stone-500 dark:text-stone-400">{job.location}</p>
+          <p class="mt-4 flex-1 text-sm leading-6 text-stone-600 dark:text-stone-300">{job.summary}</p>
+          <span class="mt-5 text-xs font-medium text-stone-500 transition-colors group-hover:text-accent dark:text-stone-400 dark:group-hover:text-terminal">{t.viewExperience} →</span>
+        </a>)}
+      </div>
+    </section>
+
     <section id="showcases" class="scroll-mt-10 border-t border-stone-200 py-16 dark:border-emerald-950" aria-labelledby="work-title">
-      <div class="mb-8 flex flex-col justify-between gap-3 sm:flex-row sm:items-end"><div><p class="eyebrow">02 / case studies</p><h2 id="work-title" class="mt-2 text-2xl font-semibold">{t.work}</h2></div><p class="max-w-xl text-sm leading-6 text-stone-600 dark:text-stone-300">{t.workNote}</p></div>
+      <div class="mb-8 flex flex-col justify-between gap-3 sm:flex-row sm:items-end"><div><p class="eyebrow">03 / case studies</p><h2 id="work-title" class="mt-2 text-2xl font-semibold">{t.work}</h2></div><p class="max-w-xl text-sm leading-6 text-stone-600 dark:text-stone-300">{t.workNote}</p></div>
       {guides.length ? <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">{guides.map((guide) => <ShowcaseCard title={guide.data.title} description={guide.data.description} href={guideUrl(guide.id)} cover={guide.data.cover} tags={guide.data.tags} label={t.draftLabel} />)}</div> : <p class="text-sm text-stone-600 dark:text-stone-300">{t.empty}</p>}
     </section>
 
     <section class="grid gap-8 border-t border-stone-200 py-16 md:grid-cols-2 dark:border-emerald-950" aria-labelledby="about-title">
-      <div><p class="eyebrow">03 / method</p><h2 id="about-title" class="mt-2 text-2xl font-semibold">{t.about}</h2></div>
+      <div><p class="eyebrow">04 / method</p><h2 id="about-title" class="mt-2 text-2xl font-semibold">{t.about}</h2></div>
       <p class="max-w-2xl text-base leading-7 text-stone-600 dark:text-stone-300">{t.aboutText}</p>
     </section>
 
     <section id="contact" class="mb-16 scroll-mt-10 rounded-lg bg-[#e9efea] p-7 sm:p-10 dark:bg-[#101c16]" aria-labelledby="contact-title">
-      <p class="eyebrow">04 / contact</p><h2 id="contact-title" class="mt-2 text-2xl font-semibold">{t.contact}</h2><p class="mt-2 text-sm text-stone-600 dark:text-stone-300">{t.contactNote}</p>
+      <p class="eyebrow">05 / contact</p><h2 id="contact-title" class="mt-2 text-2xl font-semibold">{t.contact}</h2><p class="mt-2 text-sm text-stone-600 dark:text-stone-300">{t.contactNote}</p>
       <ul class="mt-6 flex flex-wrap gap-3">
         <li><a class="inline-flex rounded border border-stone-300 px-4 py-2 text-sm hover:border-accent hover:text-accent dark:border-emerald-900 dark:hover:border-terminal dark:hover:text-terminal" href={site.linkedin} target="_blank" rel="noreferrer">LinkedIn ↗</a></li>
         {site.github && <li><a class="inline-flex rounded border border-stone-300 px-4 py-2 text-sm hover:border-accent dark:border-emerald-900" href={site.github} target="_blank" rel="noreferrer">GitHub ↗</a></li>}
