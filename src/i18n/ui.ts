@@ -9,7 +9,7 @@ export const roleTitles: Record<Language, string[]> = {
 
 export const ui = {
   es: {
-    language: 'Idioma', navHome: 'Inicio', navCases: 'Casos de estudio', emailLabel: 'Correo', theme: 'Cambiar tema',
+    language: 'Idioma', navHome: 'Inicio', navCases: 'Casos de estudio', emailLabel: 'Correo', viewCv: 'Ver CV', downloadCv: 'Descargar CV', cvPreviewTitle: 'Vista previa del CV', cvClose: 'Cerrar', cvOpenNewTab: 'Abrir en otra pestaña', theme: 'Cambiar tema',
     greeting: 'Hola, soy Michael', role: 'Administrador de sistemas',
     intro: 'Tengo más de 8 años de experiencia administrando y automatizando infraestructura física, virtual y en la nube para mantener servicios fiables y disponibles.',
     intro2: 'Combino administración de sistemas y prácticas DevOps con Linux, VMware, Proxmox, contenedores, Kubernetes y pipelines GitLab CI/CD.',
@@ -21,7 +21,7 @@ export const ui = {
     empty: 'Próximamente publicaré casos de estudio.',
   },
   en: {
-    language: 'Language', navHome: 'Home', navCases: 'Case Studies', emailLabel: 'Email', theme: 'Toggle theme',
+    language: 'Language', navHome: 'Home', navCases: 'Case Studies', emailLabel: 'Email', viewCv: 'View CV', downloadCv: 'Download CV', cvPreviewTitle: 'CV preview', cvClose: 'Close', cvOpenNewTab: 'Open in new tab', theme: 'Toggle theme',
     greeting: "Hi, I'm Michael", role: 'Systems Administrator',
     intro: 'I have over 8 years of experience administering and automating physical, virtual, and cloud infrastructure to keep services reliable and available.',
     intro2: 'I combine systems administration and DevOps practices across Linux, VMware, Proxmox, containers, Kubernetes, and GitLab CI/CD pipelines.',
@@ -33,7 +33,7 @@ export const ui = {
     empty: 'Technical case studies will be published here soon.',
   },
   fr: {
-    language: 'Langue', navHome: 'Accueil', navCases: 'Études de cas', emailLabel: 'E-mail', theme: 'Changer de thème',
+    language: 'Langue', navHome: 'Accueil', navCases: 'Études de cas', emailLabel: 'E-mail', viewCv: 'Voir le CV', downloadCv: 'Télécharger le CV', cvPreviewTitle: 'Aperçu du CV', cvClose: 'Fermer', cvOpenNewTab: 'Ouvrir dans un nouvel onglet', theme: 'Changer de thème',
     greeting: 'Bonjour, je suis Michael', role: 'Administrateur systèmes',
     intro: 'J’ai plus de 8 ans d’expérience dans l’administration et l’automatisation d’infrastructures physiques, virtuelles et cloud afin d’assurer la fiabilité et la disponibilité des services.',
     intro2: 'J’associe l’administration systèmes et les pratiques DevOps autour de Linux, VMware, Proxmox, des conteneurs, Kubernetes et des pipelines GitLab CI/CD.',

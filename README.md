@@ -10,7 +10,7 @@ Portafolio estático hecho con Astro y Tailwind CSS, con español como idioma ra
 ├── tailwind.config.mjs
 ├── postcss.config.mjs
 ├── package.json
-└── src/
+├── src/
     ├── components/
     │   ├── Footer.astro
     │   ├── Header.astro
@@ -35,6 +35,14 @@ Portafolio estático hecho con Astro y Tailwind CSS, con español como idioma ra
     │   ├── fr/index.astro
     │   └── fr/etudes-de-cas/[slug].astro
     └── styles/global.css
+└── public/
+    ├── cv/
+    │   ├── michael-zapata-cv-es.pdf
+    │   ├── michael-zapata-cv-en.pdf
+    │   └── michael-zapata-cv-fr.pdf
+    └── images/
+        ├── .gitkeep
+        └── profile.png
 ```
 
 ## Ejecutar
@@ -55,6 +63,7 @@ El resultado queda en `dist/`. En Cloudflare Pages, configura el comando de comp
 ## Personalización pendiente
 
 - El retrato se carga desde `public/images/profile.png` y se muestra recortado en círculo junto al saludo.
+- Coloca los CV en `public/cv/` con los nombres indicados en el árbol. El botón del hero abre una previsualización del PDF del idioma activo, con opciones para abrirlo en otra pestaña o descargarlo.
 - Actualiza `github` en `src/data/site.ts` cuando tengas la URL del perfil. El enlace se oculta mientras esté vacío.
 - Configura el dominio del sitio en `astro.config.mjs` al desplegar; no se añade canonical mientras se desconoce el dominio.
 - Las tres guías incluidas son ejemplos editoriales editables, no afirmaciones de proyectos ya realizados.
