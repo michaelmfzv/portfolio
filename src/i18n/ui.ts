@@ -2,15 +2,15 @@ export const languages = ['es', 'en', 'fr'] as const;
 export type Language = (typeof languages)[number];
 
 export const roleTitles: Record<Language, string[]> = {
-  es: ['Administrador de Sistemas', 'DevOps Engineer', 'Network Engineer'],
+  es: ['Administrador de sistemas', 'Ingeniero DevOps', 'Ingeniero de redes'],
   en: ['Systems Administrator', 'DevOps Engineer', 'Network Engineer'],
-  fr: ['Administrateur systèmes', 'Ingénieur DevOps', 'Ingénieur réseau'],
+  fr: ['Administrateur systèmes', 'Ingénieur DevOps', 'Ingénieur réseaux'],
 };
 
 export const ui = {
   es: {
     language: 'Idioma', navHome: 'Inicio', navGuides: 'Guías', theme: 'Cambiar tema',
-    greeting: 'Hola, soy Michael', role: 'Administrador de Sistemas',
+    greeting: 'Hola, soy Michael', role: 'Administrador de sistemas',
     intro: 'Diseño y opero infraestructura tecnológica con una mirada analítica, formada en matemáticas.',
     intro2: 'Convierto sistemas complejos en plataformas observables, automatizadas y preparadas para alta disponibilidad.',
     stack: 'Tecnologías', stackNote: 'Herramientas que forman parte de mi trabajo diario.',
