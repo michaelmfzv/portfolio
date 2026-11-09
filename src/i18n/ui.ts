@@ -11,7 +11,7 @@ export const ui = {
   es: {
     language: 'Idioma', navHome: 'Inicio', navCases: 'Casos de estudio', emailLabel: 'Correo', viewCv: 'Ver CV', downloadCv: 'Descargar CV', cvPreviewTitle: 'Vista previa del CV', cvClose: 'Cerrar', cvOpenNewTab: 'Abrir en otra pestaña', theme: 'Cambiar tema',
     greeting: 'Hola, soy Michael', role: 'Administrador de sistemas',
-    intro: 'Tengo más de 8 años de experiencia administrando y automatizando infraestructura física, virtual y en la nube para mantener servicios fiables y disponibles.',
+    intro: 'Cuento con amplia experiencia administrando y automatizando infraestructura física, virtual y en la nube para mantener servicios fiables y disponibles.',
     intro2: 'Combino administración de sistemas y prácticas DevOps con Linux, VMware, Proxmox, contenedores, Kubernetes y pipelines GitLab CI/CD.',
     stack: 'Tecnologías', stackNote: 'Herramientas que forman parte de mi trabajo diario.',
     work: 'Casos de estudio', workNote: 'Análisis técnicos que documentan decisiones, procedimientos y aprendizajes de infraestructura.',
@@ -23,7 +23,7 @@ export const ui = {
   en: {
     language: 'Language', navHome: 'Home', navCases: 'Case Studies', emailLabel: 'Email', viewCv: 'View CV', downloadCv: 'Download CV', cvPreviewTitle: 'CV preview', cvClose: 'Close', cvOpenNewTab: 'Open in new tab', theme: 'Toggle theme',
     greeting: "Hi, I'm Michael", role: 'Systems Administrator',
-    intro: 'I have over 8 years of experience administering and automating physical, virtual, and cloud infrastructure to keep services reliable and available.',
+    intro: 'I bring extensive experience administering and automating physical, virtual, and cloud infrastructure to keep services reliable and available.',
     intro2: 'I combine systems administration and DevOps practices across Linux, VMware, Proxmox, containers, Kubernetes, and GitLab CI/CD pipelines.',
     stack: 'Technology', stackNote: 'Tools that are part of my day-to-day work.',
     work: 'Case Studies', workNote: 'Technical analyses documenting infrastructure decisions, procedures, and lessons learned.',
@@ -35,7 +35,7 @@ export const ui = {
   fr: {
     language: 'Langue', navHome: 'Accueil', navCases: 'Études de cas', emailLabel: 'E-mail', viewCv: 'Voir le CV', downloadCv: 'Télécharger le CV', cvPreviewTitle: 'Aperçu du CV', cvClose: 'Fermer', cvOpenNewTab: 'Ouvrir dans un nouvel onglet', theme: 'Changer de thème',
     greeting: 'Bonjour, je suis Michael', role: 'Administrateur systèmes',
-    intro: 'J’ai plus de 8 ans d’expérience dans l’administration et l’automatisation d’infrastructures physiques, virtuelles et cloud afin d’assurer la fiabilité et la disponibilité des services.',
+    intro: 'Je dispose d’une solide expérience dans l’administration et l’automatisation d’infrastructures physiques, virtuelles et cloud afin d’assurer la fiabilité et la disponibilité des services.',
     intro2: 'J’associe l’administration systèmes et les pratiques DevOps autour de Linux, VMware, Proxmox, des conteneurs, Kubernetes et des pipelines GitLab CI/CD.',
     stack: 'Technologies', stackNote: 'Les outils de mon travail quotidien.',
     work: 'Études de cas', workNote: 'Analyses techniques documentant les décisions, les procédures et les enseignements en infrastructure.',
