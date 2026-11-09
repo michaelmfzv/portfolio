@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import TechBadge from './TechBadge.astro';
 import ShowcaseCard from './ShowcaseCard.astro';
+import ExperienceIcon from './ExperienceIcon.astro';
 import { ui, roleTitles, localizedPath, type Language } from '../i18n/ui';
 import { experience, technologies, site } from '../data/site';
 interface Work { id: string; data: { title: string; description: string; tags: string[]; cover?: string; }; }
@@ -75,11 +76,10 @@ const experienceId = (company: string) => company.toLowerCase().replace(/[^a-z0-
       <div class="mb-8 flex flex-col justify-between gap-3 sm:flex-row sm:items-end"><div><p class="eyebrow">02 / experience</p><h2 id="experience-title" class="mt-2 text-2xl font-semibold">{t.experience}</h2></div><p class="max-w-xl text-sm leading-6 text-stone-600 dark:text-stone-300">{t.experienceNote}</p></div>
       <div class="grid gap-5 md:grid-cols-3">
         {experience[lang].map((job) => <a href={`${experienceUrl}#${experienceId(job.company)}`} class="group flex h-full flex-col rounded-lg border border-stone-200 bg-white/60 p-5 transition-colors hover:border-accent/60 hover:bg-white dark:border-emerald-950 dark:bg-[#0d1713]/60 dark:hover:border-terminal/60 dark:hover:bg-[#0d1713]">
-          <div class="flex flex-col justify-between gap-2"><h3 class="text-lg font-semibold group-hover:text-accent dark:group-hover:text-terminal">{job.role}</h3><p class="font-mono text-xs text-stone-500 dark:text-emerald-200/70">{job.period}</p></div>
+          <div class="grid grid-cols-[1rem_minmax(0,1fr)] items-start gap-x-3"><div class="pt-1"><ExperienceIcon company={job.company} /></div><div class="min-w-0"><div class="flex flex-col gap-1"><h3 class="text-lg font-semibold leading-6 group-hover:text-accent dark:group-hover:text-terminal">{job.role}</h3><p class="font-mono text-xs leading-5 text-stone-500 dark:text-emerald-200/70">{job.period}</p></div>
           <p class="mt-2 text-sm font-medium text-accent dark:text-terminal">{job.company}</p>
-          <p class="mt-1 text-xs text-stone-500 dark:text-stone-400">{job.location}</p>
-          <p class="mt-4 flex-1 text-sm leading-6 text-stone-600 dark:text-stone-300">{job.summary}</p>
-          <span class="mt-5 text-xs font-medium text-stone-500 transition-colors group-hover:text-accent dark:text-stone-400 dark:group-hover:text-terminal">{t.viewExperience} →</span>
+          <p class="mt-1 text-xs text-stone-500 dark:text-stone-400">{job.location}</p></div></div>
+          <span class="mt-5 self-end text-right text-xs font-medium text-stone-500 transition-colors group-hover:text-accent dark:text-stone-400 dark:group-hover:text-terminal">{t.viewExperience} →</span>
         </a>)}
       </div>
     </section>
