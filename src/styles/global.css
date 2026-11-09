@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: light; }
+:root.dark { color-scheme: dark; }
+html { scroll-behavior: smooth; }
+body { @apply bg-paper text-ink antialiased transition-colors dark:bg-[#090f0d] dark:text-[#e4eee7]; }
+::selection { @apply bg-teal-200 text-teal-950 dark:bg-emerald-900 dark:text-emerald-100; }
+.section-shell { @apply mx-auto w-full max-w-6xl px-5 sm:px-8; }
+.eyebrow { @apply font-mono text-xs uppercase tracking-[0.2em] text-accent dark:text-terminal; }
+.surface { @apply border border-stone-200 bg-white/80 dark:border-emerald-950 dark:bg-[#0d1713]; }
+.guide-content { @apply text-base leading-7 text-stone-700 dark:text-stone-300; }
+.guide-content h2 { @apply mb-3 mt-10 text-2xl font-semibold tracking-tight text-ink dark:text-stone-100; }
+.guide-content p { @apply mb-5; }
+.guide-content ul, .guide-content ol { @apply mb-5 ml-6 list-disc space-y-2; }
+.guide-content a { @apply text-accent underline underline-offset-4 dark:text-terminal; }

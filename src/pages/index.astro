@@ -1,0 +1,6 @@
+---
+import { getCollection } from 'astro:content';
+import HomePage from '../components/HomePage.astro';
+const guides = (await getCollection('guides', ({ data }) => data.lang === 'es' && !data.draft)).map((entry) => ({ id: entry.id, data: entry.data }));
+---
+<HomePage lang="es" guides={guides} />

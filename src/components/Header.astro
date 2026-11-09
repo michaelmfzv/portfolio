@@ -1,0 +1,32 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+import type { Language } from '../i18n/ui';
+interface Props { lang: Language; labels: Record<string, string>; }
+const { lang, labels } = Astro.props;
+const home = lang === 'es' ? '/' : `/${lang}/`;
+---
+<header class="border-b border-stone-200/80 dark:border-emerald-950">
+  <div class="section-shell flex min-h-16 items-center justify-between gap-4">
+    <a href={home} class="font-mono text-sm font-semibold tracking-tight" aria-label="Michael Zapata — {labels.navHome}">mz<span class="text-accent dark:text-terminal">.</span></a>
+    <nav class="flex items-center gap-4 sm:gap-6" aria-label="Main navigation">
+      <a class="text-sm text-stone-600 hover:text-accent dark:text-stone-300 dark:hover:text-terminal" href={home}>{labels.navHome}</a>
+      <a class="text-sm text-stone-600 hover:text-accent dark:text-stone-300 dark:hover:text-terminal" href={`${home}#showcases`}>{labels.navGuides}</a>
+      <label class="sr-only" for="language-select">{labels.language}</label>
+      <select id="language-select" class="bg-transparent text-sm text-stone-700 outline-none dark:text-stone-200" aria-label={labels.language}>
+        <option value="es" selected={lang === 'es'}>ES</option>
+        <option value="en" selected={lang === 'en'}>EN</option>
+        <option value="fr" selected={lang === 'fr'}>FR</option>
+      </select>
+      <ThemeToggle label={labels.theme} />
+    </nav>
+  </div>
+</header>
+<script>
+  const select = document.querySelector<HTMLSelectElement>('#language-select');
+  select?.addEventListener('change', () => {
+    const locale = select.value;
+    // Los slugs de las guías se traducen; al cambiar idioma volvemos al inicio
+    // para no enlazar a una página que todavía no existe en el idioma elegido.
+    window.location.href = locale === 'es' ? '/' : `/${locale}/`;
+  });
+</script>

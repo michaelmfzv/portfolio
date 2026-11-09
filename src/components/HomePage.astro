@@ -1,0 +1,57 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TechBadge from './TechBadge.astro';
+import ShowcaseCard from './ShowcaseCard.astro';
+import { ui, localizedPath, type Language } from '../i18n/ui';
+import { technologies, site } from '../data/site';
+interface Work { id: string; data: { title: string; description: string; tags: string[]; cover?: string; }; }
+interface Props { lang: Language; guides: Work[]; }
+const { lang, guides } = Astro.props;
+const t = ui[lang];
+const guideUrl = (id: string) => localizedPath(lang, `guias/${id.split('/').at(-1)}`);
+---
+<Layout lang={lang} title={`${site.name} — ${t.role}`} description={`${t.intro} ${t.intro2}`}>
+  <div class="section-shell">
+    <section class="grid min-h-[560px] items-center gap-12 py-20 md:grid-cols-[1.4fr_0.6fr] md:py-28" aria-labelledby="hero-title">
+      <div>
+        <p class="eyebrow">{t.greeting}</p>
+        <h1 id="hero-title" class="mt-5 max-w-3xl text-4xl font-semibold leading-tight tracking-[-0.04em] sm:text-6xl">{t.role}</h1>
+        <div class="mt-7 max-w-2xl space-y-2 text-lg leading-8 text-stone-600 dark:text-stone-300">
+          <p>{t.intro}</p><p>{t.intro2}</p>
+        </div>
+        <a href="#showcases" class="mt-8 inline-flex items-center gap-2 rounded-md bg-ink px-4 py-3 text-sm font-medium text-white hover:bg-accent dark:bg-terminal dark:text-[#07100b] dark:hover:bg-emerald-200">{t.navGuides}<span aria-hidden="true">↓</span></a>
+      </div>
+      <div class="surface hidden rounded-lg p-6 font-mono text-xs leading-6 text-stone-500 md:block dark:text-emerald-100/70" aria-hidden="true">
+        <div class="mb-5 flex gap-1.5"><i class="h-2 w-2 rounded-full bg-red-400"></i><i class="h-2 w-2 rounded-full bg-amber-400"></i><i class="h-2 w-2 rounded-full bg-emerald-500"></i></div>
+        <p><span class="text-accent dark:text-terminal">$</span> whoami</p><p class="text-ink dark:text-emerald-50">sysadmin · devops</p>
+        <p class="mt-4"><span class="text-accent dark:text-terminal">$</span> systemctl status availability</p>
+        <p class="text-emerald-700 dark:text-terminal">● design: deliberate</p><p class="text-emerald-700 dark:text-terminal">● operations: observable</p><p class="text-emerald-700 dark:text-terminal">● changes: reproducible</p>
+        <p class="mt-4"><span class="text-accent dark:text-terminal">$</span> <span class="animate-pulse">▍</span></p>
+      </div>
+    </section>
+
+    <section class="border-t border-stone-200 py-16 dark:border-emerald-950" aria-labelledby="stack-title">
+      <div class="mb-7"><p class="eyebrow">01 / stack</p><h2 id="stack-title" class="mt-2 text-2xl font-semibold">{t.stack}</h2><p class="mt-2 text-sm text-stone-600 dark:text-stone-300">{t.stackNote}</p></div>
+      <ul class="flex flex-wrap gap-3">{technologies.map((name) => <li><TechBadge name={name} /></li>)}</ul>
+    </section>
+
+    <section id="showcases" class="scroll-mt-10 border-t border-stone-200 py-16 dark:border-emerald-950" aria-labelledby="work-title">
+      <div class="mb-8 flex flex-col justify-between gap-3 sm:flex-row sm:items-end"><div><p class="eyebrow">02 / field notes</p><h2 id="work-title" class="mt-2 text-2xl font-semibold">{t.work}</h2></div><p class="max-w-xl text-sm leading-6 text-stone-600 dark:text-stone-300">{t.workNote}</p></div>
+      {guides.length ? <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">{guides.map((guide) => <ShowcaseCard title={guide.data.title} description={guide.data.description} href={guideUrl(guide.id)} cover={guide.data.cover} tags={guide.data.tags} label={t.draftLabel} />)}</div> : <p class="text-sm text-stone-600 dark:text-stone-300">{t.empty}</p>}
+    </section>
+
+    <section class="grid gap-8 border-t border-stone-200 py-16 md:grid-cols-2 dark:border-emerald-950" aria-labelledby="about-title">
+      <div><p class="eyebrow">03 / method</p><h2 id="about-title" class="mt-2 text-2xl font-semibold">{t.about}</h2></div>
+      <p class="max-w-2xl text-base leading-7 text-stone-600 dark:text-stone-300">{t.aboutText}</p>
+    </section>
+
+    <section id="contact" class="mb-16 scroll-mt-10 rounded-lg bg-[#e9efea] p-7 sm:p-10 dark:bg-[#101c16]" aria-labelledby="contact-title">
+      <p class="eyebrow">04 / contact</p><h2 id="contact-title" class="mt-2 text-2xl font-semibold">{t.contact}</h2><p class="mt-2 text-sm text-stone-600 dark:text-stone-300">{t.contactNote}</p>
+      <ul class="mt-6 flex flex-wrap gap-3">
+        <li><a class="inline-flex rounded border border-stone-300 px-4 py-2 text-sm hover:border-accent hover:text-accent dark:border-emerald-900 dark:hover:border-terminal dark:hover:text-terminal" href={site.linkedin} target="_blank" rel="noreferrer">LinkedIn ↗</a></li>
+        {site.github && <li><a class="inline-flex rounded border border-stone-300 px-4 py-2 text-sm hover:border-accent dark:border-emerald-900" href={site.github} target="_blank" rel="noreferrer">GitHub ↗</a></li>}
+        <li><a class="inline-flex rounded border border-stone-300 px-4 py-2 text-sm hover:border-accent dark:border-emerald-900" href={`mailto:${site.email}`}>{site.email}</a></li>
+      </ul>
+    </section>
+  </div>
+</Layout>

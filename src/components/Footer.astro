@@ -1,0 +1,11 @@
+---
+import type { Language } from '../i18n/ui';
+interface Props { lang: Language; text: string; }
+const { lang, text } = Astro.props;
+---
+<footer class="border-t border-stone-200 py-7 dark:border-emerald-950">
+  <div class="section-shell flex flex-col justify-between gap-2 font-mono text-xs text-stone-500 sm:flex-row dark:text-stone-400">
+    <span>© {new Date().getFullYear()} Michael Zapata</span>
+    <span>{text}</span>
+  </div>
+</footer>

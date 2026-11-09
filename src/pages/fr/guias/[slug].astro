@@ -1,0 +1,14 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+import { ui } from '../../../i18n/ui';
+export async function getStaticPaths() {
+  const entries = await getCollection('guides', ({ data }) => data.lang === 'fr' && !data.draft);
+  return entries.map((entry) => ({ params: { slug: entry.id.split('/').at(-1) }, props: { entry } }));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<Layout lang="fr" title={`${entry.data.title} — Michael Zapata`} description={entry.data.description}>
+<article class="section-shell max-w-3xl py-16"><a class="eyebrow" href="/fr/">← {ui.fr.navHome}</a><p class="eyebrow mt-10">{entry.data.date.toLocaleDateString('fr')}</p><h1 class="mt-3 text-3xl font-semibold tracking-tight sm:text-5xl">{entry.data.title}</h1><p class="mt-5 text-lg leading-8 text-stone-600 dark:text-stone-300">{entry.data.description}</p><div class="guide-content mt-12 max-w-none"><Content /></div></article>
+</Layout>
