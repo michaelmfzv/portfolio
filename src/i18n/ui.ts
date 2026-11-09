@@ -1,10 +1,16 @@
 export const languages = ['es', 'en', 'fr'] as const;
 export type Language = (typeof languages)[number];
 
+export const roleTitles: Record<Language, string[]> = {
+  es: ['Administrador de Sistemas', 'DevOps Engineer', 'Network Engineer'],
+  en: ['Systems Administrator', 'DevOps Engineer', 'Network Engineer'],
+  fr: ['Administrateur systèmes', 'Ingénieur DevOps', 'Ingénieur réseau'],
+};
+
 export const ui = {
   es: {
     language: 'Idioma', navHome: 'Inicio', navGuides: 'Guías', theme: 'Cambiar tema',
-    greeting: 'Hola, soy Michael', role: 'Administrador de Sistemas · DevOps Engineer',
+    greeting: 'Hola, soy Michael', role: 'Administrador de Sistemas',
     intro: 'Diseño y opero infraestructura tecnológica con una mirada analítica, formada en matemáticas.',
     intro2: 'Convierto sistemas complejos en plataformas observables, automatizadas y preparadas para alta disponibilidad.',
     stack: 'Tecnologías', stackNote: 'Herramientas que forman parte de mi trabajo diario.',
@@ -16,7 +22,7 @@ export const ui = {
   },
   en: {
     language: 'Language', navHome: 'Home', navGuides: 'Guides', theme: 'Toggle theme',
-    greeting: "Hi, I'm Michael", role: 'Systems Administrator · DevOps Engineer',
+    greeting: "Hi, I'm Michael", role: 'Systems Administrator',
     intro: 'I design and operate technology infrastructure with an analytical perspective grounded in mathematics.',
     intro2: 'I turn complex systems into observable, automated platforms built for high availability.',
     stack: 'Technology', stackNote: 'Tools that are part of my day-to-day work.',
@@ -28,7 +34,7 @@ export const ui = {
   },
   fr: {
     language: 'Langue', navHome: 'Accueil', navGuides: 'Guides', theme: 'Changer de thème',
-    greeting: 'Bonjour, je suis Michael', role: 'Administrateur systèmes · Ingénieur DevOps',
+    greeting: 'Bonjour, je suis Michael', role: 'Administrateur systèmes',
     intro: 'Je conçois et exploite des infrastructures technologiques avec une approche analytique issue des mathématiques.',
     intro2: 'Je transforme des systèmes complexes en plateformes observables, automatisées et conçues pour la haute disponibilité.',
     stack: 'Technologies', stackNote: 'Les outils de mon travail quotidien.',

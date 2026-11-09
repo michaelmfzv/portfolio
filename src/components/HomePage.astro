@@ -2,20 +2,33 @@
 import Layout from '../layouts/Layout.astro';
 import TechBadge from './TechBadge.astro';
 import ShowcaseCard from './ShowcaseCard.astro';
-import { ui, localizedPath, type Language } from '../i18n/ui';
+import { ui, roleTitles, localizedPath, type Language } from '../i18n/ui';
 import { technologies, site } from '../data/site';
 interface Work { id: string; data: { title: string; description: string; tags: string[]; cover?: string; }; }
 interface Props { lang: Language; guides: Work[]; }
 const { lang, guides } = Astro.props;
 const t = ui[lang];
+const roles = roleTitles[lang];
+const nameParts = site.name.split(' ');
+const givenNames = nameParts.slice(0, 2).join(' ');
+const familyNames = nameParts.slice(2).join(' ');
+const mobileName = `${nameParts[0]} ${nameParts[2]}`;
 const guideUrl = (id: string) => localizedPath(lang, `guias/${id.split('/').at(-1)}`);
 ---
 <Layout lang={lang} title={`${site.name} — ${t.role}`} description={`${t.intro} ${t.intro2}`}>
   <div class="section-shell">
     <section class="grid min-h-[560px] items-center gap-12 py-20 md:grid-cols-[1.4fr_0.6fr] md:py-28" aria-labelledby="hero-title">
       <div>
-        <p class="eyebrow">{t.greeting}</p>
-        <h1 id="hero-title" class="mt-5 max-w-3xl text-4xl font-semibold leading-tight tracking-[-0.04em] sm:text-6xl">{t.role}</h1>
+        <div class="flex items-center gap-5 sm:gap-7">
+          <div class="flex h-36 w-36 shrink-0 items-center justify-center overflow-hidden rounded-full border border-stone-300 bg-stone-200 font-mono text-xl text-stone-500 dark:border-emerald-900 dark:bg-emerald-950 dark:text-emerald-200 sm:h-40 sm:w-40" aria-label={lang === 'es' ? 'Foto de Michael Zapata' : lang === 'en' ? 'Photo of Michael Zapata' : 'Photo de Michael Zapata'}>
+            <span data-profile-fallback aria-hidden="true">MZ</span>
+            <img data-profile-image src="/images/profile.png" alt="Michael Zapata" class="hidden h-full w-full object-cover" width="128" height="128" />
+          </div>
+          <h1 id="hero-title" class="min-w-0 text-3xl font-semibold leading-[1.05] tracking-[-0.045em] sm:text-5xl xl:text-6xl"><span class="block lg:hidden">{mobileName}</span><span class="hidden lg:block">{givenNames}</span><span class="hidden lg:block">{familyNames}</span></h1>
+        </div>
+        <p class="mt-5 min-h-[1.75em] font-mono text-base text-accent sm:text-lg dark:text-terminal" aria-label={roles.join(', ')}>
+          <span aria-hidden="true" class="mr-2">$</span><span data-role-text aria-hidden="true">{roles[0]}</span><span aria-hidden="true" class="ml-0.5 animate-pulse">▍</span>
+        </p>
         <div class="mt-7 max-w-2xl space-y-2 text-lg leading-8 text-stone-600 dark:text-stone-300">
           <p>{t.intro}</p><p>{t.intro2}</p>
         </div>
@@ -55,3 +68,53 @@ const guideUrl = (id: string) => localizedPath(lang, `guias/${id.split('/').at(-
     </section>
   </div>
 </Layout>
+
+<script>
+  // Escribe y borra cada cargo como en una consola. El texto inicial queda
+  // disponible si JavaScript está desactivado y la animación respeta reduced motion.
+  const roleElement = document.querySelector<HTMLElement>('[data-role-text]');
+  const profileImage = document.querySelector<HTMLImageElement>('[data-profile-image]');
+  const profileFallback = document.querySelector<HTMLElement>('[data-profile-fallback]');
+
+  if (profileImage && profileFallback) {
+    const showProfile = () => {
+      profileImage.classList.remove('hidden');
+      profileFallback.classList.add('hidden');
+    };
+    profileImage.addEventListener('load', showProfile, { once: true });
+    profileImage.addEventListener('error', () => profileImage.classList.add('hidden'), { once: true });
+    if (profileImage.complete && profileImage.naturalWidth > 0) showProfile();
+  }
+
+  if (roleElement) {
+    const roles = (roleElement.closest('[aria-label]')?.getAttribute('aria-label') ?? '').split(', ');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reducedMotion && roles.length > 1) {
+      let roleIndex = 0;
+      let letterIndex = roles[0].length;
+      let deleting = true;
+
+      const typeNextCharacter = () => {
+        const currentRole = roles[roleIndex];
+        roleElement.textContent = currentRole.slice(0, letterIndex);
+
+        if (!deleting && letterIndex < currentRole.length) {
+          letterIndex++;
+          window.setTimeout(typeNextCharacter, 75);
+        } else if (!deleting) {
+          deleting = true;
+          window.setTimeout(typeNextCharacter, 1500);
+        } else if (letterIndex > 0) {
+          letterIndex--;
+          window.setTimeout(typeNextCharacter, 38);
+        } else {
+          deleting = false;
+          roleIndex = (roleIndex + 1) % roles.length;
+          window.setTimeout(typeNextCharacter, 300);
+        }
+      };
+
+      window.setTimeout(typeNextCharacter, 1500);
+    }
+  }
+</script>

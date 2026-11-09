@@ -54,6 +54,7 @@ El resultado queda en `dist/`. En Cloudflare Pages, configura el comando de comp
 
 ## Personalización pendiente
 
+- El retrato se carga desde `public/images/profile.png` y se muestra recortado en círculo junto al saludo.
 - Actualiza `github` en `src/data/site.ts` cuando tengas la URL del perfil. El enlace se oculta mientras esté vacío.
 - Configura el dominio del sitio en `astro.config.mjs` al desplegar; no se añade canonical mientras se desconoce el dominio.
 - Las tres guías incluidas son ejemplos editoriales editables, no afirmaciones de proyectos ya realizados.
